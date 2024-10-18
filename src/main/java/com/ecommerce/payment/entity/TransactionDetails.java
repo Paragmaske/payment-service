@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 @Data
 @Table(name="transaction_details")
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class TransactionDetails {
     @Id

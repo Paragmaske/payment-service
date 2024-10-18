@@ -13,7 +13,8 @@ public class PaymentServiceImpl implements  PaymentService{
     @Autowired
     private PaymentRepository paymentRepository;
     @Override
-    public Long makePayment(PaymentRequest paymentRequest) {
+    public Long
+    makePayment(PaymentRequest paymentRequest) {
         TransactionDetails transactionDetails=TransactionDetails.builder().paymentMode(paymentRequest.getPaymentMode().name())
                 .payementDate(new Timestamp(System.currentTimeMillis()))
                 .paymentStatus("SUCCESS")

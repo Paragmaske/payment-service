@@ -1,0 +1,66 @@
+<configuration>
+    <property name="LOG_DIR" value="/app/logs"/> <!-- Updated to the mounted path -->
+
+    <!-- Console Appender for general application logs -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for Aspect logs -->
+    <appender name="LOGGINGASPECT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/loggingaspect.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/loggingaspect-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for ServiceImpl logs -->
+    <appender name="PAYMENTSERVICEIMPL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/paymentserviceImpl.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/paymentserviceImpl-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for Exception logs -->
+    <appender name="EXCEPTION_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/exception.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/exception-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root Logger for all logs at INFO level -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Specific Logger for Aspect logs -->
+    <logger name="com.ecommerce.payment.Aspect" level="INFO" additivity="false">
+        <appender-ref ref="LOGGINGASPECT_FILE"/>
+    </logger>
+
+    <!-- Specific Logger for ServiceImpl logs -->
+    <logger name="com.ecommerce.payment.service" level="INFO" additivity="false">
+        <appender-ref ref="PAYMENTSERVICEIMPL_FILE"/>
+    </logger>
+
+    <!-- Logger for Exception logs -->
+    <logger name="com.ecommerce.order.ControllerAdvice" level="ERROR" additivity="false">
+        <appender-ref ref="EXCEPTION_FILE"/>
+    </logger>
+</configuration>
